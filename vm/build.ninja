@@ -1,0 +1,11 @@
+cflags = -Wall -g3 -O0 -fdiagnostics-color=always -std=c11
+clink = -ldl
+
+rule cc
+  command = gcc $cflags -o $out $in $clink
+
+rule btest
+  command = g++ $cflags -fpermissive -o $out $in -lgtest -lpthread
+
+build vm: cc vm.c fstring.c
+build test_fstring: btest test_fstring.cpp fstring.c
